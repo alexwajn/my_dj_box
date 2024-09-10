@@ -9,4 +9,3 @@ def ret_3_first_links(title, artist):
     video_ids = list(dict.fromkeys(video_ids)) #smart (or dumb) way to remove duplicates haha
     return video_ids[0:3]
 
-#print(ret_3_first_links("californication", "rhcp"))
