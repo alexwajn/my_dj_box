@@ -1,11 +1,13 @@
 from pytube import YouTube
-from playsound import playsound
+import os
+from moviepy.editor import *
 
-def yt_dl(link):
+def yt_dl(link, dir):
     yt = YouTube(link)
-    yt.streams.filter(only_audio=True).get_by_itag(249).download()
-    print(yt.streams.filter(only_audio=True))
+    yt.streams.filter(only_audio=True, file_extension="mp4").first().download(output_path=dir)
+    return yt.streams.filter(only_audio=True, file_extension="mp4").first().default_filename
 
-#yt_dl('https://www.youtube.com/watch?v=p-Z3YrHJ1sU')
-
-playsound('C:/Users/awajnsztejn/OneDrive - Rehabilitation Centre for Children, Inc/Documents/Py/PyT/StereoLove.mp3')
+def mp4_to_mp3(filein, fileout):
+    if not os.path.exists(fileout):
+        audio = AudioFileClip(filein)
+        audio.write_audiofile(fileout, logger=None)
